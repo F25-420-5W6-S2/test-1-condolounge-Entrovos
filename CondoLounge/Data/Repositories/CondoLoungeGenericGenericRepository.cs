@@ -16,6 +16,7 @@ namespace CondoLounge.Data.Repositories
             _context = db;
             _dbSet = _context.Set<T>();
         }
+
         public void Add(T entity)
         {
             throw new NotImplementedException();
