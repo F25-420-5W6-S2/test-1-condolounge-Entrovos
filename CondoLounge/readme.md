@@ -9,12 +9,12 @@ One user may have multiple condos in multiple buildings.
 A condo will have: CondoNumber, location/ address. 
 
 To do:
-1. Make the application runnable. (2%)
-2. Add the Identity middleware (2%)
+1. Make the application runnable. (2%) (DONE)
+2. Add the Identity middleware (2%) (DONE)
 2. Create the entities for User, Building, Condo (2%) (DONE)
 3. Create the specific repos for the entities (2%) (DONE)
 4. Seed some data with an Admin user that is part of an initial <br/>
    Building, Condo and the Default and Admin roles available. (3%)
 5. Change the Registration page to add an Building, Condo and Default role to user (3%)
-6. Create a repo method to get all the Users for a Building (3%)
-7. Create a repo method to get all the Condos for a Building (3%)
+6. Create a repo method to get all the Users for a Building (3%) (DONE)
+7. Create a repo method to get all the Condos for a Building (3%) (DONE)
