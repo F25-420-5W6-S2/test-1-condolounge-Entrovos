@@ -20,9 +20,17 @@ namespace CondoLounge.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Building>();
+            modelBuilder.Entity<Building>()
+                .HasMany(b => b.Condos)
+                .WithOne(c => c.Building);
 
-            modelBuilder.Entity<Condo>();
+            modelBuilder.Entity<Condo>()
+                .HasOne(c => c.Building)
+                .WithMany(b => b.Condos);
+
+            modelBuilder.Entity<Condo>()
+                .HasMany(c => c.Users)
+                .WithMany(u => u.Condos);
         }
     }
 }
