@@ -9,84 +9,33 @@ namespace CondoLounge.Data.Repositories
         {
         }
 
-        public Building GetOneById(int id)
+        public IEnumerable<Condo> GetAllCondos(int buildingId)
         {
-            try
+            return _context.Buildings
+                .First(b => b.Id == buildingId)
+                .Condos;
+        }
+
+        public IEnumerable<ApplicationUser> GetAllUsers(int buildingId)
+        {
+            IEnumerable<Condo> condos = _context.Buildings
+                .First(b => b.Id == buildingId)
+                .Condos;
+
+            IEnumerable<ApplicationUser> users = [];
+            
+            foreach (Condo condo in condos)
             {
-                _logger.LogInformation($"GetOneById was called for Id '{id}' . . .");
-
-                var result = _context.Set<Building>().Find(id);
-
-                if (result == null)
+                foreach (ApplicationUser user in condo.Users)
                 {
-                    throw new Exception($"Building of Id {id} not found.");
+                    if (!users.Contains(user))
+                    {
+                        users.Append(user);
+                    }
                 }
+            }
 
-                return result;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Failed to get: {ex}");
-                return null;
-            }
+            return users;
         }
-
-        public void Add(Building building)
-        {
-            try
-            {
-                _logger.LogInformation("Add was called . . .");
-
-                _context.Set<Building>().Add(building);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Failed to add: {ex}");
-            }
-        }
-
-        public void Update(Building building)
-        {
-            try
-            {
-                _logger.LogInformation($"Update was called . . .");
-
-                _context.Set<Building>().Update(building);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Failed to update: {ex}");
-            }
-        }
-
-        public void Delete(Building building)
-        {
-            try
-            {
-                _logger.LogInformation($"Delete was called . . .");
-
-                _context.Set<Building>().Remove(building);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Failed to delete: {ex}");
-            }
-        }
-
-        public bool SaveAll()
-        {
-            //Returns true when the number of state entries written to the database is > 0.
-            return _context.SaveChanges() > 0;
-        }
-
-        //public IEnumerable<Condo> GetAllCondos()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public IEnumerable<ApplicationUser> GetAllUsers()
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

@@ -3,10 +3,10 @@
     public interface ICondoLoungeGenericRepository<T>
     {
         IEnumerable<T> GetAll();
-        T GetById(object id);
+        T GetOneById(object id);
         void Add(T entity);
         void Update(T entity);
         void Delete(T entity);
-        void SaveAll();
+        bool SaveAll();
     }
 }
